@@ -81,6 +81,6 @@ class Stack:
         :return: Object at the top of the Stack
         """
         if self.top == -1:
-            return ""
+            return None
         else:
             return self.lst[self.top]
