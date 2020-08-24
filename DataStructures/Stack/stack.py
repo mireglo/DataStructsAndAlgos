@@ -7,7 +7,7 @@ class OverFlowError(Exception):
     (Pushing an object onto a full Stack)
     """
     def __init__(self):
-        super().__init__(self, "Stack Overflow Error")
+        super().__init__(self, "Overflow Error")
 
 
 class UnderFlowError(Exception):
@@ -16,7 +16,7 @@ class UnderFlowError(Exception):
     (Popping an object from an empty Stack)
     """
     def __init__(self):
-        super().__init__(self, "Stack Underflow Error")
+        super().__init__(self, "Underflow Error")
 
 
 class Stack:
