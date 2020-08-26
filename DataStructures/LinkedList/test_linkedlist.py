@@ -32,3 +32,57 @@ class TestLinkedList(TestCase):
         y = Node('Node2')
         lst = LinkedList(x, y)
         assert lst.__repr__() == "Head --> Node1 -> Node2 -> Tail"
+
+    def test_insert(self):
+        x = Node('Node1')
+        y = Node('Node2')
+        lst = LinkedList(x, y)
+        assert lst.__repr__() == "Head --> Node1 -> Node2 -> Tail"
+        lst.insert(Node('Node0'), 0)
+        assert lst.__repr__() == "Head --> Node0 -> Node1 -> Node2 -> Tail"
+        lst.insert(Node('Node3'), 3)
+        assert lst.__repr__() == "Head --> Node0 -> Node1 -> Node2 -> Node3 -> Tail"
+        lst.insert(Node('Node2.5'), 3)
+        assert lst.__repr__() == "Head --> Node0 -> Node1 -> Node2 -> Node2.5 -> Node3 -> Tail"
+        lst.insert(Node('Node1.5'), 2)
+        assert lst.__repr__() == "Head --> Node0 -> Node1 -> Node1.5 -> Node2 -> Node2.5 -> Node3 -> Tail"
+
+        with self.assertRaises(IndexError):
+            lst.insert(Node('Node-1'), -1)
+
+        with self.assertRaises(IndexError):
+            lst.insert(Node('Node7'), len(lst)+1)
+
+    def test_remove(self):
+        lst = LinkedList(Node('Node1'), Node('Node2'))
+        lst.insert(Node('Node0'), 0)
+        lst.insert(Node('Node3'), 3)
+        assert lst.__repr__() == "Head --> Node0 -> Node1 -> Node2 -> Node3 -> Tail"
+
+        assert lst.remove(1).value == "Node1"
+        assert lst.__repr__() == "Head --> Node0 -> Node2 -> Node3 -> Tail"
+        assert lst.remove(1).value == "Node2"
+        assert lst.__repr__() == "Head --> Node0 -> Node3 -> Tail"
+
+        with self.assertRaises(IndexError):
+            lst.remove(-1)
+        with self.assertRaises(IndexError):
+            lst.remove(len(lst))
+
+        assert lst.remove(0).value == "Node0"
+        assert lst.__repr__() == "Head --> Node3 -> Tail"
+        assert lst.remove(0).value == "Node3"
+        assert lst.__repr__() == "Head --> Tail"
+        assert len(lst) == 0
+
+    def test_find(self):
+        lst = LinkedList(Node(0), Node('1'))
+        lst.insert(Node([2]), 2)
+        lst.insert(Node({3: 3}), 3)
+        assert lst.__repr__() == "Head --> 0 -> 1 -> [2] -> {3: 3} -> Tail"
+
+        assert lst.find({3: 3}) == 3
+        assert lst.find([2]) == 2
+        assert lst.find('1') == 1
+        assert lst.find(0) == 0
+        assert lst.find(Node(4)) == -1
