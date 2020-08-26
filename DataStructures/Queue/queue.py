@@ -1,11 +1,12 @@
 from typing import Any
 from DataStructures.Stack.stack import OverFlowError, UnderFlowError
 
+
 class Queue:
     """
-        Implementation of Queue ADT. Has the following methods:
-        __init__(), __len__(), __repr__(), enqueue(object), dequeue(), isEmpty(), peek()
-        """
+    Implementation of Queue ADT. Has the following methods:
+    __init__(), __len__(), __repr__(), enqueue(object), dequeue(), isEmpty(), peek()
+    """
 
     def __init__(self, n: int) -> None:
         """
@@ -25,7 +26,7 @@ class Queue:
     def __repr__(self) -> str:
         """
         Prints a readable version of the queue.
-        :return: self.repr
+        :return: Readable string of the queue
         """
         ret_str = 'Front --> '
         for obj in self.lst:

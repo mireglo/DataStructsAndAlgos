@@ -43,7 +43,7 @@ class Stack:
     def __repr__(self) -> str:
         """
         Prints a readable version of the stack.
-        :return: self.repr
+        :return: Readable string of the Stack
         """
         ret_str = 'Top --> '
         for obj in self.lst[::-1]:
