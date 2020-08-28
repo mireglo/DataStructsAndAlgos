@@ -73,6 +73,8 @@ class TestLinkedList(TestCase):
         assert lst.__repr__() == "Head --> Node3 -> Tail"
         assert lst.remove(0).value == "Node3"
         assert lst.__repr__() == "Head --> Tail"
+        assert lst.head is None
+        assert lst.tail is None
         assert len(lst) == 0
 
     def test_find(self):
@@ -86,3 +88,14 @@ class TestLinkedList(TestCase):
         assert lst.find('1') == 1
         assert lst.find(0) == 0
         assert lst.find(Node(4)) == -1
+
+    def test_reverse(self):
+        lst = LinkedList(Node(0), Node('1'))
+        lst.insert(Node([2]), 2)
+        lst.insert(Node({3: 3}), 3)
+        assert lst.__repr__() == "Head --> 0 -> 1 -> [2] -> {3: 3} -> Tail"
+
+        lst.reverse()
+        assert lst.__repr__() == "Head --> {3: 3} -> [2] -> 1 -> 0 -> Tail"
+        assert lst.head.value == {3: 3}
+        assert lst.tail.value == 0

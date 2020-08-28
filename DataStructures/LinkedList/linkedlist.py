@@ -129,6 +129,13 @@ class LinkedList:
         if position >= self.size or position < 0:
             raise IndexError
 
+        elif position == 0 and self.size == 1:
+            return_node = self.head
+            self.head = None
+            self.tail = None
+            self.size = 0
+            return return_node
+
         elif position == 0:
             return_node = self.head
             self.head = self.head.nextNode
@@ -173,3 +180,21 @@ class LinkedList:
             curr_node = curr_node.nextNode
             index += 1
         return -1
+
+    def reverse(self) -> None:
+        """
+        Reverses the Linked List
+        :return: None
+        """
+        if self.size > 1:
+            curr = self.head
+
+            while curr is not None:
+                prev_node = curr.prevNode
+                curr.prevNode = curr.nextNode
+                curr.nextNode = prev_node
+                curr = curr.prevNode
+
+            temp = self.head
+            self.head = self.tail
+            self.tail = temp
