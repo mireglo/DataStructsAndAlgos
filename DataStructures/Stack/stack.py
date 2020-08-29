@@ -22,7 +22,7 @@ class UnderFlowError(Exception):
 class Stack:
     """
     Implementation of Stack ADT. Has the following methods:
-    __init__(), __len__(), __repr__(), push(object), pop(), isEmpty(), peek()
+    __init__(int), __len__(), __repr__(), push(object), pop(), isEmpty(), peek()
     """
 
     def __init__(self, n: int) -> None:

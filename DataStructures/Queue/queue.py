@@ -5,7 +5,7 @@ from DataStructures.Stack.stack import OverFlowError, UnderFlowError
 class Queue:
     """
     Implementation of Queue ADT. Has the following methods:
-    __init__(), __len__(), __repr__(), enqueue(object), dequeue(), isEmpty(), peek()
+    __init__(int), __len__(), __repr__(), enqueue(object), dequeue(), isEmpty(), peek()
     """
 
     def __init__(self, n: int) -> None:

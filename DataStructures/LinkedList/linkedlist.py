@@ -5,8 +5,8 @@ from typing import Any
 
 class Node:
     """
-    Node is the building block used to create Linked Lists. They have a value which holds an object, they also have
-    pointers next_node and prev_node which hold the node in front or behind them in the Linked List
+    Node is the building block used to create Linked Lists. They have a 'value' which holds an object, they also have
+    pointers 'nextNode' and 'prevNode' which hold the node in front or behind them in the Linked List
     """
     def __init__(self, value: any, prev_node: Node = None, next_node: Node = None):
         self.value = value
@@ -17,21 +17,41 @@ class Node:
 class LinkedList:
     """
     Implementation of Double Linked List ADT. Has the following methods:
-    __init__(), __len__(), __repr__(), __iter__(), __next__(), insert(n), remove(n), find(obj), is_empty()
+    __init__(Node=None, Node=None), __len__(), __repr__(), __iter__(), __next__(), insert(n), remove(n), find(obj), is_empty()
     """
 
-    def __init__(self, head: Node, tail: Node = None) -> None:
+    def __init__(self, head: Node = None, tail: Node = None) -> None:
         """
         :param head: First Node in the Linked List
         """
-        self.head = head
-        if tail is None:
+        if head is None and tail is None:
+            self.head = None
+            self.tail = None
+            self.size = 0
+
+        if head is not None and tail is None:
+            head.prevNode = None
+            head.nextNode = None
+
+            self.head = head
             self.tail = head
             self.size = 1
-        else:
+
+        elif head is None and tail is not None:
+            tail.prevNode = None
+            tail.nextNode = None
+
+            self.head = tail
             self.tail = tail
-            self.head.nextNode = self.tail
-            self.tail.prevNode = self.head
+            self.size = 1
+        else:
+            head.prevNode = None
+            head.nextNode = tail
+            tail.prevNode = head
+            tail.nextNode = None
+
+            self.head = head
+            self.tail = tail
             self.size = 2
 
     def __len__(self) -> int:
