@@ -8,7 +8,6 @@ Abstract Data Types:
 3) Double Linked List
 4) Binary Search Tree
 5) Heap
-6) Priority Queue
 7) AVL Trees
 8) Graph
 9) Disjoint Set
