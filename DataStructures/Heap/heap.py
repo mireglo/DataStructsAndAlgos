@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 
 class Heap:
@@ -6,13 +6,14 @@ class Heap:
     Implementation of the Max Heap ADT. Has the following methods:
     __init__(), max(), bubble_up(int), insert(int), bubble_down(int), extract_max(int), increase_priority(int, int)
     """
+
     def __init__(self) -> None:
         self.heap_lst = []
 
     def __len__(self) -> int:
         return len(self.heap_lst)
 
-    def max(self) -> int:
+    def max(self) -> Optional[int]:
         """
         Returns the maximum value stored in the Heap
         :return: Maximum value stored in the Heap
@@ -64,13 +65,15 @@ class Heap:
                 position = left_child
 
             elif right_child < len(self.heap_lst):
-                if self.heap_lst[left_child] >= self.heap_lst[right_child] and self.heap_lst[position] < self.heap_lst[left_child]:
+                if self.heap_lst[left_child] >= self.heap_lst[right_child] and \
+                        self.heap_lst[position] < self.heap_lst[left_child]:
                     temp = self.heap_lst[position]
                     self.heap_lst[position] = self.heap_lst[left_child]
                     self.heap_lst[left_child] = temp
                     position = left_child
 
-                elif self.heap_lst[left_child] <= self.heap_lst[right_child] and self.heap_lst[position] < self.heap_lst[right_child]:
+                elif self.heap_lst[left_child] <= self.heap_lst[right_child] and \
+                        self.heap_lst[position] < self.heap_lst[right_child]:
                     temp = self.heap_lst[position]
                     self.heap_lst[position] = self.heap_lst[right_child]
                     self.heap_lst[right_child] = temp
@@ -112,7 +115,7 @@ def build_max_heap(arr: List[int]) -> Heap:
     return_heap = Heap()
     return_heap.heap_lst = arr
 
-    for i in range(len(return_heap)//2 - 1, -1, -1):
+    for i in range(len(return_heap) // 2 - 1, -1, -1):
         return_heap.bubble_down(i)
 
     return return_heap
