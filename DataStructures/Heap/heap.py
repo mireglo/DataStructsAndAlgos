@@ -1,15 +1,16 @@
-from typing import Any
-
-from DataStructures.BinarySearchTree.binarysearchtree import TreeNode
+from typing import List
 
 
 class Heap:
     """
     Implementation of the Max Heap ADT. Has the following methods:
-    __init__(), max()
+    __init__(), max(), bubble_up(int), insert(int), bubble_down(int), extract_max(int), increase_priority(int, int)
     """
     def __init__(self) -> None:
         self.heap_lst = []
+
+    def __len__(self) -> int:
+        return len(self.heap_lst)
 
     def max(self) -> int:
         """
@@ -63,17 +64,20 @@ class Heap:
                 position = left_child
 
             elif right_child < len(self.heap_lst):
-                if self.heap_lst[left_child] >= self.heap_lst[right_child]:
+                if self.heap_lst[left_child] >= self.heap_lst[right_child] and self.heap_lst[position] < self.heap_lst[left_child]:
                     temp = self.heap_lst[position]
                     self.heap_lst[position] = self.heap_lst[left_child]
                     self.heap_lst[left_child] = temp
                     position = left_child
 
-                else:
+                elif self.heap_lst[left_child] <= self.heap_lst[right_child] and self.heap_lst[position] < self.heap_lst[right_child]:
                     temp = self.heap_lst[position]
                     self.heap_lst[position] = self.heap_lst[right_child]
                     self.heap_lst[right_child] = temp
                     position = right_child
+
+                else:
+                    break
 
             else:
                 break
@@ -102,3 +106,13 @@ class Heap:
         """
         self.heap_lst[node_index] = new_priority
         self.bubble_up(node_index)
+
+
+def build_max_heap(arr: List[int]) -> Heap:
+    return_heap = Heap()
+    return_heap.heap_lst = arr
+
+    for i in range(len(return_heap)//2 - 1, -1, -1):
+        return_heap.bubble_down(i)
+
+    return return_heap

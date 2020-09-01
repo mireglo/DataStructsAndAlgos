@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from DataStructures.Heap.heap import Heap
+from DataStructures.Heap.heap import Heap, build_max_heap
 
 
 class TestHeap(TestCase):
@@ -84,3 +84,9 @@ class TestHeap(TestCase):
 
         h.increase_priority(3, 4)
         assert h.heap_lst == [8, 7, 5, 4, 2, 1, 4]
+
+    def test_build_max_heap(self):
+        arr = [23, 33, 45, 31, 44, 51, 20, 65, 37, 18, 12, 70, 49, 28, 29]
+        h = build_max_heap(arr)
+        print(h.heap_lst)
+        assert h.heap_lst == [70, 65, 51, 37, 44, 49, 29, 31, 33, 18, 12, 45, 23, 28, 20]
