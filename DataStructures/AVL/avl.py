@@ -57,17 +57,17 @@ class AVLTreeNode:
         elif self.left is None and self.right is not None:
             self.height = self.right.height + 1
             self.size = self.right.size + 1
-            self.bf = self.right.height
+            self.bf = (self.right.height + 1)
 
         elif self.left is not None and self.right is None:
             self.height = self.left.height + 1
             self.size = self.left.size + 1
-            self.bf = 0 - self.left.height
+            self.bf = 0 - (self.left.height + 1)
 
         else:
             self.height = max(self.left.height, self.right.height) + 1
             self.size = self.left.size + self.right.size + 1
-            self.bf = self.right.height - self.left.height
+            self.bf = (self.right.height + 1) - (self.left.height + 1)
 
     def insert(self, root: AVLTreeNode, key: int, value: Any) -> AVLTreeNode:
         if root is None:
@@ -79,32 +79,24 @@ class AVLTreeNode:
         elif key > root.key:
             root.right = self.insert(root.right, key, value)
 
-        left_height = 0
-        if root.left is not None:
-            left_height = root.left.height
-        right_height = 0
-        if root.right is not None:
-            right_height = root.right.height
-        root.height = 1 + max(left_height, right_height)
-
-        balance_factor = right_height - left_height
+        root.update_helper()
 
         # Left Left
-        if balance_factor < -1 and key <= root.left.key:
-            return self.rightRotate(root)
+        if root.bf < -1 and key <= root.left.key:
+            return self.right_rotate(root)
 
         # Right Right
-        if balance_factor > 1 and key > root.right.key:
+        if root.bf > 1 and key > root.right.key:
             return self.left_rotate(root)
 
         # Left Right
-        if balance_factor < -1 and key > root.left.key:
+        if root.bf < -1 and key > root.left.key:
             root.left = self.left_rotate(root.left)
-            return self.rightRotate(root)
+            return self.right_rotate(root)
 
         # Right Left
-        if balance_factor > 1 and key <= root.right.key:
-            root.right = self.rightRotate(root.right)
+        if root.bf > 1 and key <= root.right.key:
+            root.right = self.right_rotate(root.right)
             return self.left_rotate(root)
 
         return root

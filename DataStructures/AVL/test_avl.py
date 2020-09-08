@@ -14,3 +14,35 @@ class TestAVL(TestCase):
         avl.insert(25, "Node25")
 
         avl.pre_order_traversal()
+
+    def test_insert_LL(self):
+        avl = AVL()
+        avl.insert(2, "Node2")
+        avl.insert(1, "Node1")
+        avl.insert(0, "Node0")
+
+        avl.pre_order_traversal()
+
+    def test_insert_RR(self):
+        avl = AVL()
+        avl.insert(0, "Node0")
+        avl.insert(1, "Node1")
+        avl.insert(2, "Node2")
+
+        avl.pre_order_traversal()
+
+    def test_insert_LR(self):
+        avl = AVL()
+        avl.insert(2, "Node2")
+        avl.insert(0, "Node0")
+        avl.insert(1, "Node1")
+
+        avl.pre_order_traversal()
+
+    def test_insert_RL(self):
+        avl = AVL()
+        avl.insert(0, "Node0")
+        avl.insert(2, "Node2")
+        avl.insert(1, "Node1")
+
+        avl.pre_order_traversal()
